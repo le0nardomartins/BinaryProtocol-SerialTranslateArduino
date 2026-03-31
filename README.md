@@ -1,4 +1,4 @@
-# FirmwareDrawix
+# Binary Protocol - Serial Translate UART bin
 
 Firmware Arduino para controle de 3 eixos (X, Y, Z) via protocolo serial binário simples.
 
@@ -14,7 +14,7 @@ O projeto recebe frames pela porta serial, valida checksum, decodifica direção
 
 1. O firmware aguarda bytes na serial.
 2. Quando encontra o byte de sincronismo (`0xAA`), começa a montar um frame de 9 bytes.
-3. Ao completar o frame, calcula checksum (XOR dos bytes 1 a 7) e compara com o byte final.
+3. Ao completar o frame, calcula o checksum (XOR dos bytes 1 a 7) e compara com o byte final.
 4. Se válido, converte os campos para um comando de movimento:
    - tipo (`G0`/`G1`),
    - direção de cada eixo (`X`, `Y`, `Z`),
@@ -63,6 +63,6 @@ O projeto recebe frames pela porta serial, valida checksum, decodifica direção
 
 ## Observações
 
-- A execução atual dos eixos e sequencial (X, depois Y, depois Z).  
+- A execução atual dos eixos é sequencial (X, depois Y, depois Z).  
   Para movimento coordenado, pode-se implementar interpolação simultânea (ex.: Bresenham).
-- O tempo de pulso esta em `delayMicroseconds(300)` para `HIGH` e `LOW`, podendo ser ajustado conforme driver/motor.
+- O tempo de pulso está em `delayMicroseconds(300)` para `HIGH` e `LOW`, podendo ser ajustado conforme driver/motor.
